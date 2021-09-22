@@ -3,7 +3,7 @@
   <% if @energy_meter.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@energy_meter.errors.count, "error") %> prohibited this energy_meter from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@energy_meter.errors.count, "error") %> prohibited this energy meter from being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
@@ -25,14 +25,14 @@
   <div class="form-group">
     <%= f.label :start, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :start, :class => 'form-control' %>
+      <%= f.date_field :start, :class => 'form-control' %>
     </div>
     <%=f.error_span(:start) %>
   </div>
   <div class="form-group">
     <%= f.label :end, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :end, :class => 'form-control' %>
+      <%= f.date_field :end, :class => 'form-control' %>
     </div>
     <%=f.error_span(:end) %>
   </div>

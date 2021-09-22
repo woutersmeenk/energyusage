@@ -5,22 +5,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:start) %></th>
       <th><%= model_class.human_attribute_name(:end) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @energy_meters.each do |energy_meter| %>
       <tr>
-        <td><%= link_to energy_meter.id, energy_meter_path(energy_meter) %></td>
-        <td><%= energy_meter.name %></td>
+        <td><%= link_to energy_meter.name, energy_meter_path(energy_meter) %></td>
         <td><%= energy_meter.start %></td>
         <td><%= energy_meter.end %></td>
-        <td><%=l energy_meter.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_energy_meter_path(energy_meter), :class => 'btn btn-default btn-xs' %>

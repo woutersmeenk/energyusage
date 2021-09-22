@@ -21,3 +21,36 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+
+<%- child_model_class = EnergyUsage -%>
+<h2><%=t '.title', :default => child_model_class.model_name.human.pluralize.titleize %></h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Start of period</th>
+      <th><%= child_model_class.human_attribute_name(:amount) %> (kWh)</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @energy_meter.energy_usages.each do |energy_usage| %>
+      <tr>
+        <td><%= energy_usage.period_start %></td>
+        <td><%= energy_usage.amount %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_energy_meter_energy_usage_path(@energy_meter, energy_usage), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      energy_meter_energy_usage_path(@energy_meter, energy_usage),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_energy_meter_energy_usage_path(@energy_meter),
+            :class => 'btn btn-primary' %>
