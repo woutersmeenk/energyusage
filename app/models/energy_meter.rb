@@ -1,0 +1,2 @@
+class EnergyMeter < ApplicationRecord
+end
