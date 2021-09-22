@@ -1,4 +1,5 @@
 class EnergyUsagesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_energy_usage, only: [:edit, :update, :destroy]
   before_action :set_energy_meter
 

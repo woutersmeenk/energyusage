@@ -4,7 +4,13 @@ class EnergyUsagesTest < ApplicationSystemTestCase
   setup do
     @energy_meter = energy_meters(:two)
     @energy_usage = energy_usages(:one)
- end
+    @user = users(:user)
+
+    visit root_url
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: "testtest"
+    click_on "Log in"
+  end
 
   test "visiting the index" do
     visit energy_meters_url

@@ -3,6 +3,12 @@ require "application_system_test_case"
 class EnergyMetersTest < ApplicationSystemTestCase
   setup do
     @energy_meter = energy_meters(:one)
+    @user = users(:user)
+
+    visit root_url
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: "testtest"
+    click_on "Log in"
   end
 
   test "visiting the index" do
