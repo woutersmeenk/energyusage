@@ -4,7 +4,10 @@ class EnergyUsagesTest < ApplicationSystemTestCase
   setup do
     @energy_meter = energy_meters(:two)
     @energy_usage = energy_usages(:one)
+    @approved_energy_usage = energy_usages(:three)
+
     @user = users(:user)
+    @manager = users(:manager)
 
     visit root_url
     fill_in "Email", with: @user.email
@@ -69,6 +72,53 @@ class EnergyUsagesTest < ApplicationSystemTestCase
     click_on "Cancel"
 
     assert_selector "h2", text: "Energy Usages"
+  end
+
+  test "approve a energy usage" do
+    click_on "Log out"
+    fill_in "Email", with: @manager.email
+    fill_in "Password", with: "testtest"
+    click_on "Log in"
+
+    visit energy_meter_url(@energy_meter)
+    within('tr', :text => @energy_usage.amount) do
+      click_on "Approve", match: :first
+    end
+
+    assert_text "Energy usage was successfully updated"
+
+    within('tr', :text => @energy_usage.amount) do
+      assert_selector "td", text: "Yes"
+      assert has_link?("Edit")
+      assert has_link?("Delete")
+    end
+
+    visit energy_meter_url(@energy_meter)
+    within('tr', :text => @energy_usage.amount) do
+      click_on "Unapprove", match: :first
+    end
+
+    assert_text "Energy usage was successfully updated"
+
+    within('tr', :text => @energy_usage.amount) do
+      assert_selector "td", text: "No"
+    end
+  end
+
+  test "no approve button exists for a normal user" do
+    visit energy_meter_url(@energy_meter)
+
+    assert has_no_link?("Approve")
+    assert has_no_link?("Unapprove")
+  end
+
+  test "no edit or delete button exists for a approved energy usages" do
+    visit energy_meter_url(@energy_meter)
+
+    within('tr', :text => @approved_energy_usage.amount) do
+      assert has_no_link?("Edit")
+      assert has_no_link?("Delete")
+    end
   end
 
   test "destroying a energy usage" do

@@ -4,8 +4,16 @@ one:
   period_start: 2021-08-01
   amount: 9.99
   energy_meter: two
+  approved: false
 
 two:
   period_start: 2021-09-01
   amount: 33.99
   energy_meter: two
+  approved: false
+
+three:
+  period_start: 2021-10-01
+  amount: 123.99
+  energy_meter: two
+  approved: true

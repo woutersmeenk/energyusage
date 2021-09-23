@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   resources :energy_meters do
     resources :energy_usages, except: [:index, :show]
+    post "energy_usages/:id/toggle_approved", to: "energy_usages#toggle_approved"
   end
 end
