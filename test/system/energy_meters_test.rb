@@ -3,6 +3,7 @@ require "application_system_test_case"
 class EnergyMetersTest < ApplicationSystemTestCase
   setup do
     @energy_meter = energy_meters(:one)
+    @energy_meter_with_energy_usages = energy_meters(:two)
     @user = users(:user)
 
     visit root_url
@@ -68,11 +69,20 @@ class EnergyMetersTest < ApplicationSystemTestCase
   end
 
   test "deleting a energy meter" do
-    visit energy_meters_url
+    visit energy_meter_url(@energy_meter)
     page.accept_confirm do
       click_on "Delete", match: :first
     end
 
     assert_text "Energy meter was successfully deleted"
+  end
+
+  test "deleting a energy meter with energy usage" do
+    visit energy_meter_url(@energy_meter_with_energy_usages)
+    page.accept_confirm do
+      click_on "Delete", match: :first
+    end
+
+    assert_text "Energy meter could not be deleted"
   end
 end

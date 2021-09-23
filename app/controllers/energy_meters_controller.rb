@@ -35,8 +35,11 @@ class EnergyMetersController < ApplicationController
   end
 
   def destroy
-    @energy_meter.destroy
-    redirect_to energy_meters_url, notice: 'Energy meter was successfully deleted.'
+    if @energy_meter.destroy
+      redirect_to energy_meters_url, notice: 'Energy meter was successfully deleted.'
+    else
+      redirect_to @energy_meter, notice: 'Energy meter could not be deleted.'
+    end
   end
 
   private
