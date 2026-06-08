@@ -1,4 +1,5 @@
 Test for gerrit
+Another test on main
 
 # README
 
@@ -44,4 +45,3 @@ Project to try out rails. A simple web app to enter energy usages.
 - 0.5 hours: Deploy to heroku
 
 Total: 17
-
